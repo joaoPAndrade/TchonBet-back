@@ -21,6 +21,17 @@ export class UserService {
     });
   }
 
+  async addWallet(id: number, value: number): Promise<User> {
+    return this.prisma.user.update({
+      where: { id:Number(id) },
+      data: {
+        wallet: {
+          increment: value,
+        },
+      },
+    });
+  }
+
   async validateUser(cpf: string, senha: string): Promise<User | null> {
     const user = await this.findByCPF(cpf);
 

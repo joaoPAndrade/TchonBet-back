@@ -61,4 +61,14 @@ export class UserController {
   remove(@Param('id') id: number): Promise<void> {
     return this.userService.remove(id);
   }
+
+
+  @ApiOperation({ summary: 'Adicionar valor na carteira do usuário' })
+  @ApiBody({ schema: { properties: { userId: { type: 'number', description: 'ID do usuário' }, value: { type: 'number', description: 'Valor a ser adicionado' } } } })
+  @ApiResponse({ status: 200, description: 'Valor adicionado com sucesso.' })
+  @ApiResponse({ status: 404, description: 'Usuário não encontrado.' })
+  @Post('/addWallet')
+  addWallet(@Body() body: { userId: number, value: number }): Promise<User> {
+    return this.userService.addWallet(body.userId, body.value);
+  }
 }
