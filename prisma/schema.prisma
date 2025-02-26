@@ -8,11 +8,49 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        String  @id @default(uuid())
-  nome      String
-  cpf       String  @unique
-  email     String
-  carteira  Float   @default(0)
-  senha     String
+enum Status {
+  win
+  loss
+  waiting
 }
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  cpf       String   @unique
+  email     String
+  birthDate DateTime
+  carteira  Float    @default(0)
+  wallet    Float   @default(0)
+  password  String
+  Bet Bets[]
+}
+
+model Games {
+  id            Int      @id @default(autoincrement())
+  teamA         String
+  teamB         String
+  oddA          Float
+  oddB          Float
+  date          DateTime
+  isFinished    Boolean  @default(false)
+  time_ganhador String   @default("Ainda não encerrado")
+  Bet           Bets[]
+}
+
+model Bets {
+  id     Int      @id @default(autoincrement())
+  idUser Int
+  idGame Int
+  amount Float
+  date   DateTime @default(now())
+  time   String
+  status Status   @default(waiting)
+  team   String
+
+  betUser User  @relation(fields: [idUser], references: [id])
+  betGame Games @relation(fields: [idGame], references: [id])
+}
+
+
+

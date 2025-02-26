@@ -9,20 +9,25 @@ export class UserService {
   constructor(private prisma: PrismaService) {}
 
   async create(user: User): Promise<User> {
-    const hashedPassword = await bcrypt.hash(user.senha, 10);
+    const hashedPassword = await bcrypt.hash(user.password, 10);
+    
+    user.birthDate = new Date(user.birthDate);
+
     return this.prisma.user.create({
       data: {
         ...user,
-        senha: hashedPassword,
+        password: hashedPassword,
       },
     });
   }
 
   async validateUser(cpf: string, senha: string): Promise<User | null> {
     const user = await this.findByCPF(cpf);
-    if (user && (await bcrypt.compare(senha, user.senha))) {
+
+    if (user && (await bcrypt.compare(senha, user.password))) {
       return user;
     }
+
     return null;
   }
 
@@ -30,19 +35,20 @@ export class UserService {
     return this.prisma.user.findMany();
   }
 
-  async findOne(id: string): Promise<User | null> {
-    return this.prisma.user.findUnique({ where: { id } });
+  async findOne(id: number): Promise<User | null> {
+
+    return this.prisma.user.findUnique({ where: { id:Number(id) } });
   }
 
   async findByCPF(cpf: string): Promise<User | null> {
     return this.prisma.user.findUnique({ where: { cpf } });
   }
 
-  async update(id: string, user: Partial<User>): Promise<User> {
-    return this.prisma.user.update({ where: { id }, data: user });
+  async update(id: number, user: Partial<User>): Promise<User> {
+    return this.prisma.user.update({ where: { id:Number(id) }, data: user });
   }
 
-  async remove(id: string): Promise<void> {
-    await this.prisma.user.delete({ where: { id } });
+  async remove(id: number): Promise<void> {
+    await this.prisma.user.delete({ where: { id:Number(id) } });
   }
 }

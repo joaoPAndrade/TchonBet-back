@@ -1,9 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
 
+
 export class UserDto {
 
   @ApiProperty({ description: 'Nome do usuário', example: 'João Silva' })
-  nome: string;
+  name: string;
 
   @ApiProperty({ description: 'CPF do usuário', example: '12345678900' })
   cpf: string;
@@ -12,8 +13,12 @@ export class UserDto {
   email: string;
 
   @ApiProperty({ description: 'Saldo da carteira do usuário', example: 100.0 })
-  carteira: number;
+  wallet: number;
 
   @ApiProperty({ description: 'Senha do usuário', example: 'senha123' })
-  senha: string;
+  password: string;
+
+  @ApiProperty({ description: 'Data de nascimento do usuário', example: '1990-01-01T00:00:00.000Z' })
+  birthDate: Date;
+
 }
