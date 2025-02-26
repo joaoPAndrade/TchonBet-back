@@ -5,11 +5,11 @@ import { ApiProperty } from '@nestjs/swagger';
 export class User {
   @ApiProperty({ description: 'ID do usuário' })
   @PrimaryGeneratedColumn('uuid')
-  id: string;
+  id: number;
 
   @ApiProperty({ description: 'Nome do usuário' })
   @Column()
-  nome: string;
+  name: string;
 
   @ApiProperty({ description: 'CPF do usuário', uniqueItems: true })
   @Column({ unique: true })
@@ -21,9 +21,9 @@ export class User {
 
   @ApiProperty({ description: 'Saldo da carteira do usuário' })
   @Column({ type: 'float', default: 0 })
-  carteira: number;
+  wallet: number;
 
   @ApiProperty({ description: 'Senha do usuário' })
   @Column()
-  senha: string;
+  password: string;
 }

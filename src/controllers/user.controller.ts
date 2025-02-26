@@ -21,7 +21,7 @@ export class UserController {
   @ApiResponse({ status: 200, description: 'Usuário encontrado.' })
   @ApiResponse({ status: 404, description: 'Usuário não encontrado.' })
   @Get(':id')
-  findOne(@Param('id') id: string): Promise<User | null> {
+  findOne(@Param('id') id: number): Promise<User | null> {
     return this.userService.findOne(id);
   }
 
@@ -49,7 +49,7 @@ export class UserController {
   @ApiResponse({ status: 200, description: 'Usuário atualizado com sucesso.' })
   @ApiResponse({ status: 404, description: 'Usuário não encontrado.' })
   @Put(':id')
-  update(@Param('id') id: string, @Body() user: Partial<User>): Promise<User> {
+  update(@Param('id') id: number, @Body() user: Partial<User>): Promise<User> {
     return this.userService.update(id, user);
   }
 
@@ -58,7 +58,7 @@ export class UserController {
   @ApiResponse({ status: 200, description: 'Usuário removido com sucesso.' })
   @ApiResponse({ status: 404, description: 'Usuário não encontrado.' })
   @Delete(':id')
-  remove(@Param('id') id: string): Promise<void> {
+  remove(@Param('id') id: number): Promise<void> {
     return this.userService.remove(id);
   }
 }
