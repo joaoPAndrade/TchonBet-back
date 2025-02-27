@@ -52,6 +52,7 @@ export class GameService {
                 idGame: Number(id)
             }
         })
+        const teamWin = team === 'teamA'? game.teamA : game.teamB
         await Promise.all(
             bets.map(bet =>
                 this.prisma.bets.update({
@@ -59,7 +60,7 @@ export class GameService {
                         id: bet.id
                     },
                     data: {
-                        status: bet.team === team ? 'win' : 'loss'
+                        status: teamWin === bet.team? 'win' : 'loss'
                     }
                 })
             )
