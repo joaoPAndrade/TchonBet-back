@@ -25,7 +25,6 @@ export class BetController {
     })
     @Post('create')
     create(@Body() bet: Bets): Promise<Bets> {
-        bet.id = 2
         return this.betService.create(bet);
     }
 
