@@ -8,7 +8,7 @@ import { Game } from "src/models/game.model";
 
 
 @ApiTags('games')
-@Controller('api/games')
+@Controller('games')
 export class GameController {
     constructor (private readonly gameService: GameService) {}
 
@@ -52,6 +52,7 @@ export class GameController {
     @ApiResponse({status: 404, description: 'Jogo não encontrado.'})
     @Put('finish/:id')
     finish(@Param('id') id:number, @Body('team') team: string ): Promise<Game> {
+        console.log(team);
         return this.gameService.finish(id, team);
     }
 

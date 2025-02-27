@@ -31,7 +31,7 @@ model Games {
   teamB      String
   oddA       Float
   oddB       Float
-  date       DateTime
+  date       String
   isFinished Boolean  @default(false)
   winnerTeam String   @default("Ainda não encerrado")
   Bet        Bets[]

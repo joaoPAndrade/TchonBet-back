@@ -26,7 +26,7 @@ export class Game {
     
     @ApiProperty({ description: 'Data do jogo' })
     @Column()
-    date: Date;
+    date: string;
     
     @ApiProperty({ description: 'Jogo finalizado' })
     @Column({ default: false })
