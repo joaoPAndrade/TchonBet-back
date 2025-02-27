@@ -22,19 +22,19 @@ model User {
   birthDate DateTime
   wallet    Float   @default(0)
   password  String
-  Bet Bets[]
+  Bet       Bets[]
 }
 
 model Games {
-  id            Int      @id @default(autoincrement())
-  teamA         String
-  teamB         String
-  oddA          Float
-  oddB          Float
-  date          DateTime
-  isFinished    Boolean  @default(false)
-  time_ganhador String   @default("Ainda não encerrado")
-  Bet           Bets[]
+  id         Int      @id @default(autoincrement())
+  teamA      String
+  teamB      String
+  oddA       Float
+  oddB       Float
+  date       DateTime
+  isFinished Boolean  @default(false)
+  winnerTeam String   @default("Ainda não encerrado")
+  Bet        Bets[]
 }
 
 model Bets {
@@ -50,6 +50,3 @@ model Bets {
   betUser User  @relation(fields: [idUser], references: [id])
   betGame Games @relation(fields: [idGame], references: [id])
 }
-
-
-
