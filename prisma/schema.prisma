@@ -42,8 +42,7 @@ model Bets {
   idUser Int
   idGame Int
   amount Float
-  date   DateTime @default(now())
-  time   String
+  date   String 
   status Status   @default(waiting)
   team   String
 
