@@ -9,7 +9,11 @@ export class GameService {
 
     async create(game: Games): Promise<Games> {
         return this.prisma.games.create({
-            data: game,
+            data: {
+                ...game,
+                oddA: Number(game.oddA),
+                oddB: Number(game.oddB),
+            }
         });
     }
     async findAll(): Promise<Games[]> {

@@ -20,7 +20,7 @@ model User {
   cpf       String   @unique
   email     String
   birthdate String
-  wallet    Float    @default(0)
+  wallet    Float   @default(0)
   password  String
   Bet       Bets[]
 }
