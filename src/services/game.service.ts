@@ -27,15 +27,15 @@ export class GameService {
     }
     async remove(id: number): Promise<void> {
         const bets = await this.prisma.bets.findMany({
-            where:{
+            where: {
                 idGame: Number(id)
             }
         })
 
         await Promise.all(
-            bets.map(bet=>
+            bets.map(bet =>
                 this.prisma.bets.delete({
-                    where:{
+                    where: {
                         id: bet.id
                     }
                 })
@@ -45,7 +45,49 @@ export class GameService {
         await this.prisma.games.delete({ where: { id: Number(id) } });
     }
     async finish(id: number, team: string): Promise<Games> {
-        return this.prisma.games.update({ where: { id: Number(id) }, data: { isFinished: true, winnerTeam: team } });
+        const game = await this.prisma.games.update({ where: { id: Number(id) }, data: { isFinished: true, winnerTeam: team } });
+
+        const bets = await this.prisma.bets.findMany({
+            where: {
+                idGame: Number(id)
+            }
+        })
+        await Promise.all(
+            bets.map(bet =>
+                this.prisma.bets.update({
+                    where: {
+                        id: bet.id
+                    },
+                    data: {
+                        status: bet.team === team ? 'win' : 'loss'
+                    }
+                })
+            )
+        );
+        const betsWin = await this.prisma.bets.findMany({
+            where: {
+                status: 'win',
+                idGame: Number(id)
+            }
+        })
+        const mult: number = team === 'teamA' ? game.oddA : game.oddB;
+        await Promise.all(
+            betsWin.map(bet =>
+                this.prisma.user.update({
+                    where: { id: bet.idUser }, data: { wallet: { increment: bet.amount * mult } }
+                })
+            )
+        );
+
+        return game;
+    }
+
+    async findAllGamesNotFinalized(): Promise<Games[]> {
+        return this.prisma.games.findMany({
+            where: {
+                isFinished: false
+            }
+        })
     }
 
 }

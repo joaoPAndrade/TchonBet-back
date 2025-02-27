@@ -59,10 +59,18 @@ export class GameController {
     @ApiOperation({summary: 'Obter um jogo pelo ID'})
     @ApiResponse({status: 200, description: 'Jogo encontrado.'})
     @ApiResponse({status: 404, description: 'Jogo não encontrado.'})
-    @Get(':id')
+    @Get('/getById/:id')
     findOne(@Param('id') id:number): Promise<Games | null> {
         return this.gameService.findOne(id);
     }
 
+    @ApiOperation({summary: 'Buscar todos os jogos no estado não finalizado'})
+    @ApiResponse({status: 200, description: 'jogos encotrados'})
+    @ApiResponse({status: 404, description: 'Jogos não encontrados'})
+    @Get('notFinished')
+    findAllGamesNotFinalized(): Promise<Game[]>{
+        return this.gameService.findAllGamesNotFinalized()
+    }
+    
 }
 
