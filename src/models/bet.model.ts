@@ -36,4 +36,13 @@ export class Bet {
     @ApiProperty({ description: 'Status da aposta' })
     @Column({ default: 'waiting' })
     status: Status;
+
+    @ApiProperty({ description: '10:00' })
+    @Column({ default: '10:00' })
+    time: string;
+
+    @ApiProperty({ description: 'valor da odd no momento da aposta' })
+    @Column({ default: 1.5 })
+    betOdd: number;
+    
 }

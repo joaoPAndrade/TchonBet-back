@@ -7,7 +7,7 @@ import { Bet } from "src/models/bet.model";
 
 
 @ApiTags('bets')
-@Controller('bet')
+@Controller('api/bet')
 export class BetController {
     constructor (private readonly betService: BetService) {}
 

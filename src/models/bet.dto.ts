@@ -25,4 +25,10 @@ export class BetDto {
     @ApiProperty({ description: 'Status da aposta', example: 'waiting' })
     status: Status;
 
+    @ApiProperty({ description: 'Horario da Aposta', example: '10:00' })
+    time: string;
+
+    @ApiProperty({ description: 'bet odd', example: 1.5 })
+    betOdd: number;
+
 }
