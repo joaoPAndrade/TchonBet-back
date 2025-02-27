@@ -5,7 +5,7 @@ Este projeto é a implementação do projeto final da disciplina BCC3004
 
 - Node.js
 
-- Docker Desktop (para execução do container do banco de dados)
+- Docker Desktop (para execução do container do banco de dados) – necessário para executar o docker Windows
 
 - WSL (Windows Subsystem for Linux) – necessário para usuários Windows
 
