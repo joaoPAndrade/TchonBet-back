@@ -19,7 +19,7 @@ export class BetDto {
     @ApiProperty({ description: 'Data da aposta', example: '2021-09-15T00:00:00.000Z' })
     date: string;
 
-    @ApiProperty({ description: 'Time da aposta', example: 'Time A' })
+    @ApiProperty({ description: 'Time da aposta', example: 'TimeA' })
     team: string;
 
     @ApiProperty({ description: 'Status da aposta', example: 'waiting' })
