@@ -7,7 +7,7 @@ import { Bet } from "src/models/bet.model";
 
 
 @ApiTags('bets')
-@Controller('bets')
+@Controller('bet')
 export class BetController {
     constructor (private readonly betService: BetService) {}
 
@@ -40,7 +40,7 @@ export class BetController {
     @ApiOperation({summary: 'Buscar todas as apostas de um usuário'})
     @ApiResponse({status: 200, description: 'Apostas encontradas.'})
     @ApiResponse({status: 404, description: 'Apostas não encontradas.'})
-    @Get('user/:id')
+    @Get('userId/:id')
     findByUser(@Param('id') id:number): Promise<Bets[]> {
         return this.betService.findByUser(id);
     }
@@ -48,7 +48,7 @@ export class BetController {
     @ApiOperation({summary: 'Buscar todas as apostas de um jogo'})
     @ApiResponse({status: 200, description: 'Apostas encontradas.'})
     @ApiResponse({status: 404, description: 'Apostas não encontradas.'})
-    @Get('game/:id')
+    @Get('gameId/:id')
     findByGame(@Param('id') id:number): Promise<Bets[]> {
         return this.betService.findByGame(id);
     }   
