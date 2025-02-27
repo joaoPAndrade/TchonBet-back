@@ -7,7 +7,7 @@ import { Bet } from "src/models/bet.model";
 
 
 @ApiTags('bets')
-@Controller('bet')
+@Controller('api/bet')
 export class BetController {
     constructor (private readonly betService: BetService) {}
 
@@ -25,6 +25,7 @@ export class BetController {
     })
     @Post('create')
     create(@Body() bet: Bets): Promise<Bets> {
+        bet.id = 2
         return this.betService.create(bet);
     }
 
