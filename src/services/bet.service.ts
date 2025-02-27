@@ -29,4 +29,6 @@ export class BetService {
         return this.prisma.bets.findMany({ where: { idGame: Number(id) } });
     }
 
+
+
 }

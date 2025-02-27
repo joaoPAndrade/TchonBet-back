@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
-import { Games } from '@prisma/client';
+import { Games, Bets } from '@prisma/client';
 
 
 @Injectable()
@@ -26,6 +26,22 @@ export class GameService {
         return this.prisma.games.update({ where: { id: Number(id) }, data: game });
     }
     async remove(id: number): Promise<void> {
+        const bets = await this.prisma.bets.findMany({
+            where:{
+                idGame: Number(id)
+            }
+        })
+
+        await Promise.all(
+            bets.map(bet=>
+                this.prisma.bets.delete({
+                    where:{
+                        id: bet.id
+                    }
+                })
+            )
+        );
+
         await this.prisma.games.delete({ where: { id: Number(id) } });
     }
     async finish(id: number, team: string): Promise<Games> {
