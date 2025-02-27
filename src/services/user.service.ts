@@ -1,9 +1,8 @@
 // src/services/user.service.ts
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma.service';
-import { User } from '@prisma/client';
+import { User, Bets } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
-
 @Injectable()
 export class UserService {
   constructor(private prisma: PrismaService) {}
@@ -62,6 +61,20 @@ export class UserService {
   }
 
   async remove(id: number): Promise<void> {
+    const apostas = await this.prisma.bets.findMany({
+      where: {
+        idUser: Number(id)
+      }
+    }) ;
+    await Promise.all(
+      apostas.map(aposta =>
+        this.prisma.bets.delete({
+          where: {
+            id: aposta.id
+          }
+        })
+      )
+    );
     await this.prisma.user.delete({ where: { id:Number(id) } });
   }
 }
