@@ -8,7 +8,7 @@ import { Game } from "src/models/game.model";
 
 
 @ApiTags('games')
-@Controller('api/games')
+@Controller('games')
 export class GameController {
     constructor (private readonly gameService: GameService) {}
 
