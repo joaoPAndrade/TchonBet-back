@@ -9,6 +9,8 @@ Este projeto é a implementação do projeto final da disciplina BCC3004
 
 - WSL (Windows Subsystem for Linux) – necessário para usuários Windows
 
+- Docker Engine - necessário para usuários Linux 
+
 ## Instalação e Execução
 
 ### Para Usuários Windows
