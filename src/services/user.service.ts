@@ -10,12 +10,14 @@ export class UserService {
 
   async create(user: User): Promise<User> {
     const hashedPassword = await bcrypt.hash(user.password, 10);
-    
-    user.birthDate = new Date(user.birthDate);
 
     return this.prisma.user.create({
       data: {
-        ...user,
+        name: user.name,
+        cpf: user.cpf,
+        email: user.email,
+        wallet: user.wallet,
+        birthdate: user.birthdate,
         password: hashedPassword,
       },
     });
