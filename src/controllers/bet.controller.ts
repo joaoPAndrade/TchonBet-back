@@ -1,5 +1,5 @@
 import { Controller, Get, Post, Put, Delete, Body, Param  } from "@nestjs/common";
-import { BetService  } from "../services/bet.service";
+import { BetService } from "src/services/bet.service";
 import { Bets } from "@prisma/client";
 import { ApiTags, ApiOperation, ApiBody, ApiResponse } from "@nestjs/swagger";
 import { BetDto } from "src/models/bet.dto";

@@ -9,11 +9,23 @@ export class BetService {
 
 
     async create(bet: Bets): Promise<Bets> {
-        return this.prisma.bets.create({
+
+        const dataBet = await this.prisma.bets.create({
             data: bet,
         });
+        if (dataBet) {
+            await this.prisma.user.update({
+                where: {
+                    id: bet.idUser
+                },
+                data: {
+                    wallet: { decrement: bet.amount }
+                }
+            })
+        }
+        return dataBet
     }
-    async findAll(): Promise<Bets[]> {      
+    async findAll(): Promise<Bets[]> {
         return this.prisma.bets.findMany();
     }
 
@@ -28,7 +40,5 @@ export class BetService {
     async findByGame(id: number): Promise<Bets[]> {
         return this.prisma.bets.findMany({ where: { idGame: Number(id) } });
     }
-
-
 
 }
