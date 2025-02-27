@@ -26,4 +26,8 @@ export class User {
   @ApiProperty({ description: 'Senha do usuário' })
   @Column()
   password: string;
+
+  @ApiProperty({ description: 'Data de nascimento do usuário' })
+  @Column()
+  birthdate: string;
 }

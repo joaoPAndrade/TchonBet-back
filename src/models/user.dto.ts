@@ -19,6 +19,6 @@ export class UserDto {
   password: string;
 
   @ApiProperty({ description: 'Data de nascimento do usuário', example: '1990-01-01T00:00:00.000Z' })
-  birthDate: Date;
+  birthdate: string;
 
 }
