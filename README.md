@@ -3,6 +3,8 @@ Este projeto é a implementação do projeto final da disciplina BCC3004
 
 ## Dependências
 
+- [Repositório do Front-end](https://github.com/joaoPAndrade/TchonBet-Front) 
+
 - Node.js
 
 - Docker Desktop (para execução do container do banco de dados) – necessário para executar o docker Windows
